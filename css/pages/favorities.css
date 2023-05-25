@@ -1,0 +1,55 @@
+:root {
+    /* Declaro variables CSS con colores principales */
+    --color-theme: #ffce30;
+    --color-active: #288ba8;
+    --color-back-active: #746ab0;
+    --color-back-inactive: #c4c6c9;
+    --color-titulos: #e83845;
+    --color-texto-blanco: #fff;
+    --color-verde: #28a79c;
+    --color-font: #1d1d1d;
+    --color-button: #7f8c8d;
+    --color-gradient: linear-gradient(to right,
+            var(--color-theme),
+            var(--color-back-active));
+}
+
+/* Titulo */
+.titulo-seccion{
+    text-shadow: 2px 2px rgba(0,0,0,.5);
+}
+
+/* Seccion Peliculas*/
+#sec-favorities-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 50px;
+    width: 100%;
+    max-width: 1000px;
+    margin: 20px auto;
+
+}
+
+#sec-favorities-list .contenedorPeliculasFavoritas {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#sec-favorities-list .contenedorPeliculasFavoritas img {
+    width: 60%;
+    margin-bottom: 10px;
+    border-radius: 15px;
+}
+
+#sec-favorities-list .contenedorPeliculasFavoritas h3 {
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+}
+
+#sec-favorities-list .contenedorPeliculasFavoritas p {
+    font-size: 12px;
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+    color: var(--color-verde);
+}

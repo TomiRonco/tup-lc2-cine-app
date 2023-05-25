@@ -6,58 +6,109 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>TUP LC2 - TP Integrador - Cine</title>
   <!-- Estilos CSS -->
+  <link rel="preload" href="css/common.css" />
   <link rel="stylesheet" href="css/common.css" />
+  <link rel="stylesheet" href="css/pages/index.css" />
 </head>
 
 <body>
-  <header>
+
+  <header class="contenidoHeader">
     <h1>
       <!--Titulo Cabecera-->
-      <span>Cartelera de Cine</span>
+      <img src="img/IconoCine.png" alt="Icono Cine" />
+      <span class="titulo-seccion">Cartelera de Cine</span>
     </h1>
-
-    <nav>
+    <nav id="nav-bar">
       <!--Menu Superior-->
       <ul>
-        <li class="current-page"><a href="index.html">Cartelera</a></li>
+        <li class="current-page"><a href="#">Cartelera</a></li>
         <li><a href="favorities.html">Mis Favoritas</a></li>
         <li><a href="help.html">Ayuda</a></li>
       </ul>
     </nav>
-
   </header>
 
   <!-- Contenido principal de la página -->
-  <main>
+  <main class="contenidoPrincipal">
 
-    <h2>Últimas Películas en Cartelera</h2>
-
+    <h2 class="titulo-seccion">Últimas Películas en Cartelera</h2>
     <section id="form-movie-new">
       <!--Seccion para agregar una palicula favorita por codigo-->
-      <form action="">
-        <input type="text">
-        <button type="submit">Agregar</button>
+      <form class="form-favoritos">
+        <div>
+          <label for="movie-title">Agregar Pélicula Favorita por Código:</label>
+        </div>
+        <div>
+          <input type="text" id="movie-title" name="movie-title" />
+          <button type="submit">Agregar</button>
+        </div>
       </form>
     </section>
 
     <section id="sec-messages">
-      <!--Seccion para mensajes-->
-      <p>Película agregada con éxito</p>
-      <p>Error: La Película seleccionada no se encuentra en la API o se produjo un
-        error al consultar</p>
-      <p>La Película ingresada ya se encuentra almacenada</p>
+      <!--Seccion para mensajes 
+      <p class="success-message">Película agregada con éxito</p>
+      <p class="error-message">Error: La Película seleccionada no se encuentra en la API o se produjo un error al
+        consultar</p>
+      <p class="warning-message">La Película ingresada ya se encuentra almacenada</p> -->
     </section>
 
     <section id="sec_peliculas">
       <!--Seccion visualizacion de peliculas-->
       <div class="contenedorPeliculas" id="contenedorPeliculas">
-        <img src="https://image.tmdb.org/t/p/w500/fcFMd3HdyX7r5gtFwVnn2qr5Yhq.jpg" alt="portada creed 3">
-        <h3>Creed III</h3>
-        <p>Código: 677179</p>
-        <p>Título original: Creed III</p>
-        <p>Idioma original: en</p>
-        <p>Año: 2023-03-01</p>
-        <p>Agregar a Favoritos</p>
+        <img src="https://www.ecartelera.com/carteles/13500/13593/008_m.jpg" alt="Imagen de película" />
+        <h3>Super Mario Bros: La película</h3>
+        <p>
+          <strong>Código:</strong> 502356 <br /><br />
+          <strong>Título original:</strong> Super Mario Bros <br />
+          <strong>Idioma original:</strong> en <br />
+          <strong>Año:</strong> 2023-04-05
+        </p>
+        <div class="button-fav">
+          <button class="button radius medium">Agregar a Favoritos</button>
+        </div>
+      </div>
+      <div class="contenedorPeliculas" id="contenedorPeliculas">
+        <img src="https://pics.filmaffinity.com/aShazam_La_furia_de_los_dioses-942384944-large.jpg"
+          alt="Imagen de película" />
+        <h3>¡Shazam!: La furia de los dioses</h3>
+        <p>
+          <strong>Código:</strong> 677179 <br /><br />
+          <strong>Título original:</strong> Rocky Balboa <br />
+          <strong>Idioma original:</strong> en <br />
+          <strong>Año:</strong> 2006-11-20
+        </p>
+        <div class="button-fav">
+          <button class="button radius medium">Agregar a Favoritos</button>
+        </div>
+      </div>
+      <div class="contenedorPeliculas" id="contenedorPeliculas">
+        <img src="https://pics.filmaffinity.com/la_nina_de_la_comunion-289909219-mmed.jpg" alt="Imagen de película" />
+        <h3>La niña de la comunión</h3>
+        <p>
+          <strong>Código:</strong> 1008005 <br /><br />
+          <strong>Título original:</strong> La niña de la comunión <br />
+          <strong>Idioma original:</strong> en <br />
+          <strong>Año:</strong> 2006-11-20
+        </p>
+        <div class="button-fav">
+          <button class="button radius medium">Agregar a Favoritos</button>
+        </div>
+      </div>
+      <div class="contenedorPeliculas" id="contenedorPeliculas">
+        <img src="https://pics.filmaffinity.com/puss_in_boots_the_last_wish-897078202-large.jpg"
+          alt="Imagen de película" />
+        <h3>Gato con Botas: El último deseo</h3>
+        <p>
+          <strong>Código:</strong> 315162 <br /><br />
+          <strong>Título original:</strong> Gato con Botas <br />
+          <strong>Idioma original:</strong> en <br />
+          <strong>Año:</strong> 2022-12-21
+        </p>
+        <div class="button-fav">
+          <button class="button radius medium">Agregar a Favoritos</button>
+        </div>
       </div>
     </section>
 

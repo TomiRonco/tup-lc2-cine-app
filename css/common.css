@@ -40,6 +40,8 @@ header {
   top: 0;
   width: 100%;
   background-image: url('../img/FondoCine6.webp');
+  background-size: cover;
+  background-repeat: no-repeat;
   border-radius: 0 0% 20px 20px;
   border-bottom: 2px solid var(--color-active);
 }
@@ -52,6 +54,7 @@ nav>ul {
 
 nav li {
   flex: 0 0 auto;
+  padding: 0 1px;
 }
 
 nav li a {
@@ -63,6 +66,7 @@ nav li a {
   font-weight: bold;
   color: var(--color-texto-blanco);
   background-color: var(--color-back-inactive);
+  border-radius: 10px 10px 0 0;
 }
 
 nav li.current-page a {
