@@ -90,26 +90,6 @@ body {
     justify-content: center;
 }
 
-.form-favoritos button {
-    cursor: pointer;
-    border: none;
-    display: inline;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    height: 30px;
-    width: 80px;
-    background-color: var(--color-verde);
-    color: var(--color-texto-blanco);
-    border-radius: 10px;
-    font-weight: bold;
-    transition: 0.3s ease all;
-}
-
-.form-favoritos button:hover {
-    background-color: var(--color-back-active);
-}
-
 /*Estilos GeneralesBotones Favoritos*/
 .button {
     cursor: pointer;
