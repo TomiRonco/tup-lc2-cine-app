@@ -34,6 +34,25 @@ body {
     padding: 10px;
 }
 
+/* Seccion Mensajes */
+.success-message {
+    background-color: #28a745;
+    border-radius: 15px;
+    padding: 10px 20px;
+}
+
+.warning-message {
+    background-color: #ffc107;
+    border-radius: 15px;
+    padding: 10px 20px;
+}
+
+.error-message {
+    background-color: #dc3545;
+    border-radius: 15px;
+    padding: 10px 20px;
+}
+
 /* Seccion Peliculas*/
 #sec_peliculas {
     display: grid;
@@ -130,11 +149,12 @@ body {
     align-items: center;
     justify-content: center;
     text-align: center;
-    height: 30px;
-    width: 80px;
-    background-color: var(--color-verde);
+    margin: 20px;
+    height: 50px;
+    width: 150px;
+    background-color: #070059;
     color: var(--color-texto-blanco);
-    border-radius: 10px;
+    border-radius: 25px;
     font-weight: bold;
     transition: 0.3s ease all;
 }
