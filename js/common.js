@@ -57,8 +57,29 @@ function createMovieElement(movie) {
 // Agregar una película a favoritos
 function addMovieToFavorites(movie) {
     const favorities = getFavoritesFromLocalStorage();
+    const alertContainer = document.getElementById('alert-container');
+
+    // Verificar si la película ya está en favoritos
+    if (favorities.includes(movie.id)) {
+        const warningMessage = document.getElementById('warning-message');
+        warningMessage.style.display = 'block';
+        hideMessage(warningMessage);
+        return;
+    }
+
     favorities.push(movie.id); // Agregar el código de la película en lugar del objeto completo
     saveFavoritesToLocalStorage(favorities);
+
+    // Mostrar mensaje de éxito
+    const successMessage = document.getElementById('success-message');
+    successMessage.style.display = 'block';
+    hideMessage(successMessage);
+
+    // Ocultar otros mensajes
+    const errorMessage = document.getElementById('error-message');
+    const warningMessage = document.getElementById('warning-message');
+    errorMessage.style.display = 'none';
+    warningMessage.style.display = 'none';
 }
 
 // Remover una película de favoritos
@@ -77,4 +98,24 @@ function getFavoritesFromLocalStorage() {
 // Guardar las películas favoritas en el almacenamiento local
 function saveFavoritesToLocalStorage(favorites) {
     localStorage.setItem('favorities', JSON.stringify(favorites));
+}
+
+// Función para ocultar un mensaje después de 5 segundos
+function hideMessage(messageElement) {
+    setTimeout(() => {
+        messageElement.style.display = 'none';
+    }, 2000);
+}
+
+// Obtener los elementos de mensaje existentes
+const successMessage = document.getElementById('success-message');
+const errorMessage = document.getElementById('error-message');
+const warningMessage = document.getElementById('warning-message');
+
+// Verificar si los elementos de mensaje existen
+if (successMessage && errorMessage && warningMessage) {
+    // Ocultar los mensajes al cargar la página
+    successMessage.style.display = 'none';
+    errorMessage.style.display = 'none';
+    warningMessage.style.display = 'none';
 }
