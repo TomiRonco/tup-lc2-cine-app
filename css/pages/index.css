@@ -19,9 +19,10 @@ body {
 }
 
 /* Titulo */
-.titulo-seccion {
-    text-shadow: 2px 2px rgba(0, 0, 0, .4);
+.titulo-seccion{
+    text-shadow: 2px 2px rgba(0,0,0,.4);
 }
+
 /* Formulario agregar peliculas */
 .form-favoritos {
     display: flex;
@@ -54,44 +55,37 @@ body {
 
 /* Seccion Peliculas*/
 #sec_peliculas {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
     width: 100%;
     max-width: 1000px;
     margin: 20px auto;
 }
 
-.contenedorPeliculas {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 30px;
+#sec_peliculas .contenedorPeliculas {
+    width: 100%;
 }
 
-.contenedorPeliculas .pelicula {
-    display: flex;
-    flex-direction: column;
-    min-height: 10px;
-    flex-grow: 1;
-    justify-content: space-between;
-}
-
-.contenedorPeliculas .pelicula .poster {
+#sec_peliculas .contenedorPeliculas img {
     width: 100%;
     margin-bottom: 10px;
     border-radius: 15px;
 }
 
-.contenedorPeliculas .pelicula .titulo {
+#sec_peliculas .contenedorPeliculas h3 {
     font-size: 16px;
     font-weight: 600;
     text-align: center;
 }
 
-.contenedorPeliculas .pelicula .descripcion {
+#sec_peliculas .contenedorPeliculas p {
     font-size: 12px;
     font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
     color: var(--color-verde);
 }
 
-.contenedorPeliculas .pelicula .button-fav {
+.contenedorPeliculas .button-fav {
     display: flex;
     justify-content: center;
 }
@@ -147,10 +141,4 @@ body {
 
 .paginacion button:hover {
     background-color: var(--color-back-active);
-}
-
-.success-message,
-.error-message,
-.warning-message {
-    display: none;
 }
