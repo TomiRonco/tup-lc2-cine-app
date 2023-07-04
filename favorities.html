@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TUP LC2 - TP Integrador - Mis Favoritas</title>
     <!-- Estilos CSS -->
+    <link rel="shortcut icon" href="img/cinema_popcorn.ico" type="image/x-icon">
     <link rel="stylesheet" href="css/common.css" />
     <link rel="stylesheet" href="css/pages/favorities.css" />
 </head>
@@ -31,11 +32,13 @@
     <main class="contenidoPrincipal">
         <section id="sec-favorities-list">
             <!--Sección contenido de películas favoritas-->
-            <div id="contenedorPeliculasFavoritas">
-                <p class="no-peliculas-mensaje" style="display: none;">No tienes películas seleccionadas en favoritos
-                </p>
-                <p id="error-mensaje" class="mensaje-error" style="display: none;">Hubo un error al cargar la
-                    información</p>
+            <div id="contenedorFavoritas"></div>
+            <div id="mensajeNoPeliculas" class="mensaje" style="display: none;">
+                No tienes películas seleccionadas.
+            </div>
+
+            <div id="mensajeError" class="mensaje" style="display: none;">
+                Ha ocurrido un error al cargar la información. Por favor, intenta nuevamente.
             </div>
         </section>
     </main>
@@ -46,6 +49,7 @@
 
     <script defer src="js/common.js"></script>
     <script defer src="js/pages/favorities.js"></script>
+
 </body>
 
 </html>

@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TUP LC2 - TP Integrador - Cine</title>
     <!-- Estilos CSS -->
-    <link rel="preload" href="css/common.css" as="style" />
+    <link rel="shortcut icon" href="img/cinema_popcorn.ico" type="image/x-icon">
+    <link href="css/common.css" as="style" />
     <link rel="stylesheet" href="css/common.css" />
     <link rel="stylesheet" href="css/pages/index.css" />
 </head>
@@ -28,6 +29,11 @@
             </ul>
         </nav>
     </header>
+
+    <div id="mensajeCargando" class="mensaje-cargando">
+        <img src="ruta_al_icono_de_carga.png" alt="Cargando..." />
+        <p>Cargando...</p>
+    </div>
 
     <!-- Contenido principal de la página -->
     <main class="contenidoPrincipal">
@@ -59,7 +65,7 @@
 
         <section id="sec_peliculas">
             <!-- Seccion visualizacion de peliculas -->
-            <div class="contenedorPeliculas" id="contenedorPeliculas"></div>
+            <div id="contenedorPeliculas" class="contenedorPeliculas"></div>
         </section>
 
 

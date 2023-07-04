@@ -1,24 +1,78 @@
-const apiKey = 'd2ec227d94b2f1aabdbc91b53a9fce0e';
-const language = 'es';
-const pageNumber = 1;
+//Función para agregar cartelera al HTML
+async function crearCartelera() {
+    const resultados = await obtenerDatosAPI();
 
-async function fetchPopularMovies() {
-    try {
-        const url = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=${language}&page=${pageNumber}`;
-        const response = await fetch(url);
-        const data = await response.json();
-        const movies = data.results;
+    const cartelera = document.getElementById('contenedorPeliculas');
+    for (const pelicula of resultados) {
+        const { poster_path, title, id, original_title, original_language, release_date } = pelicula;
 
-        const moviesContainer = document.getElementById('contenedorPeliculas');
-        moviesContainer.innerHTML = '';
+        const tarjeta = document.createElement('div');
+        tarjeta.classList.add('cartelera');
+        tarjeta.innerHTML = `
+        <img class="poster" src="https://image.tmdb.org/t/p/w500/${poster_path}">
+        <h3 class="titulo">${title}</h3>
+        <p><b>Código:</b> <span class="codigo">${id}</span><br>
+        <b>Título original:</b> ${original_title}<br>
+        <b>Idioma original:</b> ${original_language}<br>
+        <b>Año:</b> ${release_date}<br>
+        <button class="button radius medium agregar-favoritos">Agregar a Favoritos</button>`;
 
-        movies.forEach(movie => {
-            const movieElement = createMovieElement(movie);
-            moviesContainer.appendChild(movieElement);
-        });
-    } catch (error) {
-        console.log('Error:', error);
+        cartelera.appendChild(tarjeta);
     }
 }
 
-fetchPopularMovies();
+crearCartelera();
+// Función para mostrar mensajes
+function mostrarMensaje(idMensaje) {
+    const mensaje = document.getElementById(idMensaje);
+    mensaje.style.display = 'block';
+    setTimeout(() => {
+        mensaje.style.display = 'none';
+    }, 2500);
+}
+
+// Función para agregar películas a favoritos por código
+async function agregarPeliculaPorCodigo(codigo) {
+    const favoritos = JSON.parse(localStorage.getItem('FAVORITOS')) || [];
+
+    if (favoritos.includes(codigo)) {
+        mostrarMensaje('warning-message');
+        return;
+    }
+
+    const resultados = await obtenerDatosAPI();
+    const peliculaExistente = resultados.find(pelicula => pelicula.id === codigo);
+
+    if (!peliculaExistente) {
+        mostrarMensaje('error-message');
+        return;
+    }
+
+    favoritos.push(codigo);
+    localStorage.setItem('FAVORITOS', JSON.stringify(favoritos));
+    mostrarMensaje('success-message');
+}
+
+async function agregarPeliculaDesdeBoton(event) {
+    if (event.target.classList.contains('agregar-favoritos')) {
+        const tarjeta = event.target.closest('.cartelera');
+        const codigo = parseInt(tarjeta.querySelector('.codigo').textContent);
+        await agregarPeliculaPorCodigo(codigo);
+    }
+}
+
+// Asignar evento de submit al formulario para agregar películas por código
+const formFavoritos = document.getElementById('form-favoritos');
+formFavoritos.addEventListener('submit', async event => {
+    event.preventDefault();
+    const codigoInput = document.getElementById('movie-code');
+    const codigo = parseInt(codigoInput.value.trim());
+    await agregarPeliculaPorCodigo(codigo);
+    codigoInput.value = '';
+});
+
+// Obtener el contenedor de las tarjetas de película
+const cartelera = document.getElementById('contenedorPeliculas');
+
+// Agregar evento de clic a través de la delegación de eventos para agregar películas desde el botón "Agregar a Favoritos"
+cartelera.addEventListener('click', agregarPeliculaDesdeBoton);

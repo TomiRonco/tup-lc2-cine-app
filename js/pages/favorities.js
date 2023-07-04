@@ -1,42 +1,86 @@
-window.onload = function () {
-    // Obtener las películas almacenadas en el almacenamiento local
-    const favorities = localStorage.getItem('favorities') ? JSON.parse(localStorage.getItem('favorities')) : [];
+// Función para obtener las películas favoritas almacenadas en localStorage
+function obtenerPeliculasFavoritas() {
+    const favoritos = JSON.parse(localStorage.getItem('FAVORITOS')) || [];
+    return favoritos;
+}
 
-    // Obtener el contenedor donde se mostrarán las películas
-    const moviesContainer = document.getElementById('contenedorPeliculasFavoritas');
+// Función para mostrar las películas favoritas en el HTML
+async function mostrarPeliculasFavoritas() {
+    const peliculasFavoritas = obtenerPeliculasFavoritas();
+    const contenedorFavoritas = document.getElementById('contenedorFavoritas');
+    const mensajeNoPeliculas = document.getElementById('mensajeNoPeliculas');
+    const mensajeError = document.getElementById('mensajeError');
 
-    // Verificar si existen películas favoritas
-    if (favorities.length === 0) {
-        // Eliminar cualquier mensaje previamente agregado
-        moviesContainer.innerHTML = '';
+    // Limpiar el contenido actual del contenedor
+    contenedorFavoritas.innerHTML = '';
 
-        // No hay películas favoritas, mostrar el mensaje
-        const noMoviesMessage = document.createElement('p');
-        noMoviesMessage.innerText = 'No tienes películas seleccionadas en favoritos';
-        noMoviesMessage.classList.add('no-peliculas-mensaje');
-        moviesContainer.appendChild(noMoviesMessage);
+    if (peliculasFavoritas.length === 0) {
+        // Mostrar mensaje de falta de películas
+        mensajeNoPeliculas.style.display = 'block';
+        mensajeError.style.display = 'none';
     } else {
-        // Hay películas favoritas, mostrar las películas
-        favorities.forEach(movieCode => {
-            // Realizar una solicitud a la API para obtener los detalles de la película por su código
-            const apiKey = 'd2ec227d94b2f1aabdbc91b53a9fce0e';
-            const language = 'es';
-            const url = `https://api.themoviedb.org/3/movie/${movieCode}?api_key=${apiKey}&language=${language}`;
+        try {
+            // Mostrar las películas favoritas
+            for (const codigo of peliculasFavoritas) {
+                const pelicula = await obtenerPeliculaPorCodigo(codigo);
 
-            fetch(url)
-                .then(response => response.json())
-                .then(data => {
-                    // Procesar la respuesta exitosa
-                    const movie = data;
-                    const movieElement = createMovieElement(movie);
-                    moviesContainer.appendChild(movieElement);
-                })
-                .catch(error => {
-                    // Mostrar mensaje de error en caso de error
-                    const errorMessage = document.getElementById('error-mensaje');
-                    errorMessage.style.display = 'block';
-                    console.log('Error:', error);
-                });
-        });
+                if (pelicula) {
+                    const { poster_path, title, id, original_title, original_language, release_date, overview } = pelicula;
+
+                    const tarjeta = document.createElement('div');
+                    tarjeta.classList.add('favorita');
+                    tarjeta.innerHTML = `
+                  <img class="poster" src="https://image.tmdb.org/t/p/w500/${poster_path}">
+                  <h3 class="titulo">${title}</h3>
+                  <p><b>Código:</b> <span class="codigo">${id}</span><br>
+                  <b>Título original:</b> ${original_title}<br>
+                  <b>Idioma original:</b> ${original_language}<br>
+                  <b>Año:</b> ${release_date}<br>
+                  <b>Resumen:</b> ${overview}<br>
+                  <button class="button radius medium eliminar-favorita">Eliminar de Favoritos</button>`;
+
+                    contenedorFavoritas.appendChild(tarjeta);
+                }
+            }
+
+            mensajeNoPeliculas.style.display = 'none';
+            mensajeError.style.display = 'none';
+        } catch (error) {
+            // Mostrar mensaje de error
+            mensajeNoPeliculas.style.display = 'none';
+            mensajeError.style.display = 'block';
+        }
     }
-};
+}
+
+// Función para obtener los detalles de una película por su código
+async function obtenerPeliculaPorCodigo(codigo) {
+    const resultados = await obtenerDatosAPI();
+    const pelicula = resultados.find(pelicula => pelicula.id === codigo);
+    return pelicula;
+}
+
+// Función para eliminar una película de la lista de favoritos
+function eliminarPeliculaFavorita(codigo) {
+    const peliculasFavoritas = obtenerPeliculasFavoritas();
+    const indice = peliculasFavoritas.indexOf(codigo);
+
+    if (indice !== -1) {
+        peliculasFavoritas.splice(indice, 1);
+        localStorage.setItem('FAVORITOS', JSON.stringify(peliculasFavoritas));
+        mostrarPeliculasFavoritas();
+    }
+}
+
+// Agregar evento de clic a través de la delegación de eventos para eliminar películas desde el botón "Eliminar de Favoritos"
+const contenedorFavoritas = document.getElementById('contenedorFavoritas');
+contenedorFavoritas.addEventListener('click', event => {
+    if (event.target.classList.contains('eliminar-favorita')) {
+        const tarjeta = event.target.closest('.favorita');
+        const codigo = parseInt(tarjeta.querySelector('.codigo').textContent);
+        eliminarPeliculaFavorita(codigo);
+    }
+});
+
+// Mostrar las películas favoritas al cargar la página
+mostrarPeliculasFavoritas();
