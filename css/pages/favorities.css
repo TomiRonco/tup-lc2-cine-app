@@ -58,6 +58,21 @@
     justify-content: center;
 }
 
+.video-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.video-container iframe {
+    width: 300px;
+    height: 200px;
+    border-radius: 10px;
+}
+
 /* Estilos Generales Botones Favoritos */
 .button {
     cursor: pointer;
