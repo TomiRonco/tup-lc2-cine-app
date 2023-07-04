@@ -22,6 +22,7 @@ async function crearCartelera() {
 }
 
 crearCartelera();
+
 // Función para mostrar mensajes
 function mostrarMensaje(idMensaje) {
     const mensaje = document.getElementById(idMensaje);
@@ -53,6 +54,7 @@ async function agregarPeliculaPorCodigo(codigo) {
     mostrarMensaje('success-message');
 }
 
+// Función para agregar películas a favoritos por boton
 async function agregarPeliculaDesdeBoton(event) {
     if (event.target.classList.contains('agregar-favoritos')) {
         const tarjeta = event.target.closest('.cartelera');
