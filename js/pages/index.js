@@ -1,8 +1,10 @@
-//Función para agregar cartelera al HTML
+// Función para agregar cartelera al HTML
 async function crearCartelera() {
     const resultados = await obtenerDatosAPI();
 
     const cartelera = document.getElementById('contenedorPeliculas');
+    cartelera.innerHTML = '';
+
     for (const pelicula of resultados) {
         const { poster_path, title, id, original_title, original_language, release_date } = pelicula;
 
@@ -21,16 +23,26 @@ async function crearCartelera() {
     }
 }
 
-crearCartelera();
-
-// Función para mostrar mensajes
-function mostrarMensaje(idMensaje) {
-    const mensaje = document.getElementById(idMensaje);
-    mensaje.style.display = 'block';
-    setTimeout(() => {
-        mensaje.style.display = 'none';
-    }, 2500);
+// Cambiar a la página anterior
+function irPaginaAnterior() {
+    if (paginaActual > 1) {
+        paginaActual--;
+        crearCartelera();
+    }
 }
+
+// Cambiar a la página siguiente
+function irPaginaSiguiente() {
+    paginaActual++;
+    crearCartelera();
+}
+
+// Asignar eventos a los botones de paginación
+document.getElementById('btnAnterior').addEventListener('click', irPaginaAnterior);
+document.getElementById('btnSiguiente').addEventListener('click', irPaginaSiguiente);
+
+// Llamar a la función para mostrar la cartelera inicial
+crearCartelera();
 
 // Función para agregar películas a favoritos por código
 async function agregarPeliculaPorCodigo(codigo) {
@@ -62,6 +74,17 @@ async function agregarPeliculaDesdeBoton(event) {
         await agregarPeliculaPorCodigo(codigo);
     }
 }
+
+// Función para mostrar mensajes
+function mostrarMensaje(idMensaje) {
+    const mensaje = document.getElementById(idMensaje);
+    mensaje.style.display = 'block';
+    setTimeout(() => {
+        mensaje.style.display = 'none';
+    }, 2500);
+}
+
+
 
 // Asignar evento de submit al formulario para agregar películas por código
 const formFavoritos = document.getElementById('form-favoritos');
