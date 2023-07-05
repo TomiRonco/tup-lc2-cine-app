@@ -63,12 +63,20 @@ async function mostrarPeliculasFavoritas() {
     }
 }
 
-// Función para obtener los detalles de una película por su código
 async function obtenerPeliculaPorCodigo(codigo) {
-    const resultados = await obtenerDatosAPI();
-    const pelicula = resultados.find((pelicula) => pelicula.id === codigo);
-    return pelicula;
+    try {
+        const apiKey = 'd2ec227d94b2f1aabdbc91b53a9fce0e';
+        const language = 'es-ES';
+        const url = `https://api.themoviedb.org/3/movie/${codigo}?api_key=${apiKey}&language=${language}`;
+        const response = await fetch(url);
+        const pelicula = await response.json();
+        return pelicula;
+    } catch (error) {
+        console.error('Error al obtener la película:', error);
+        return null;
+    }
 }
+
 
 // Función para agregar video a la tarjeta de la película
 async function agregarVideoAPelicula(codigo, contenedorVideo) {
