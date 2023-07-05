@@ -33,9 +33,28 @@
 }
 
 /* Titulo */
-.titulo-seccion{
-    text-shadow: 2px 2px rgba(0,0,0,.4);
+.titulo-seccion {
+    text-shadow: 2px 2px rgba(0, 0, 0, .4);
 }
+
+/* Mensaje de exito/errores */
+.mensaje-exito {
+    background-color: green;
+    color: white;
+    border-radius: 15px;
+    padding: 10px 20px;
+    margin: 10px;
+}
+
+.mensaje-error {
+    background-color: red;
+    color: white;
+    border-radius: 15px;
+    padding: 10px 20px;
+    margin: 10px;
+}
+
+
 
 /* Formulario*/
 #form-cine_contacto .form {
