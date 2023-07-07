@@ -53,6 +53,14 @@ body {
     padding: 10px 20px;
 }
 
+/* Pag pel*/
+.pagina-actual {
+    display: flex;
+    justify-content: end;
+
+    font-size: 15px;
+}
+
 /* Seccion Peliculas*/
 #sec_peliculas {
     width: 100%;

@@ -21,6 +21,10 @@ async function crearCartelera() {
 
         cartelera.appendChild(tarjeta);
     }
+
+    const paginaActualElement = document.getElementById('paginaActual');
+    paginaActualElement.textContent = `Pag. ${paginaActual}`;
+
 }
 
 // Cambiar a la página anterior
@@ -70,6 +74,9 @@ async function agregarPeliculaPorCodigo(codigo) {
     favoritos.push(codigo);
     localStorage.setItem('FAVORITOS', JSON.stringify(favoritos));
     mostrarMensaje('success-message');
+
+    // Realizar desplazamiento hacia arriba
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 // Función para agregar películas a favoritos por boton
