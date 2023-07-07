@@ -33,12 +33,16 @@ function irPaginaAnterior() {
         paginaActual--;
         crearCartelera();
     }
+    
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 // Cambiar a la página siguiente
 function irPaginaSiguiente() {
     paginaActual++;
     crearCartelera();
+    
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 // Asignar eventos a los botones de paginación
@@ -54,6 +58,11 @@ async function agregarPeliculaPorCodigo(codigo) {
 
     if (favoritos.includes(codigo)) {
         mostrarMensaje('warning-message');
+        return;
+    }
+
+    if (isNaN(codigo)) {
+        mostrarMensaje('error-message');
         return;
     }
 
