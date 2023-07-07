@@ -1,6 +1,6 @@
 // Función para agregar cartelera al HTML
 async function crearCartelera() {
-    const resultados = await obtenerDatosAPI();
+    const resultados = await obtenerDatosAPI(paginaActual);
 
     const cartelera = document.getElementById('contenedorPeliculas');
     cartelera.innerHTML = '';
@@ -53,12 +53,18 @@ async function agregarPeliculaPorCodigo(codigo) {
         return;
     }
 
-    const resultados = await obtenerDatosAPI();
-    const peliculaExistente = resultados.find(pelicula => pelicula.id === codigo);
+    let peliculaEncontrada = null;
+    let pagina = 1;
 
-    if (!peliculaExistente) {
-        mostrarMensaje('error-message');
-        return;
+    while (!peliculaEncontrada) {
+        const resultados = await obtenerDatosAPI(pagina);
+        peliculaEncontrada = resultados.find((pelicula) => pelicula.id === codigo);
+        pagina++;
+
+        if (pagina > resultados.total_pages) {
+            mostrarMensaje('error-message');
+            return;
+        }
     }
 
     favoritos.push(codigo);
