@@ -106,8 +106,6 @@ function mostrarMensaje(idMensaje) {
     }, 2500);
 }
 
-
-
 // Asignar evento de submit al formulario para agregar películas por código
 const formFavoritos = document.getElementById('form-favoritos');
 formFavoritos.addEventListener('submit', async event => {

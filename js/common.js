@@ -1,6 +1,6 @@
 // Variables globales
-let paginaActual = 1; // Página actual
-const peliculasPorPagina = 10; // Número de películas por página (puedes ajustarlo según tus necesidades)
+let paginaActual = 1;
+const peliculasPorPagina = 10;
 
 // Obtener datos de la API
 async function obtenerDatosAPI(numeroPagina) {
